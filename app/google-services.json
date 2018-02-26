@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "496332539824",
+    "firebase_url": "https://chat-4c029.firebaseio.com",
+    "project_id": "chat-4c029",
+    "storage_bucket": "chat-4c029.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:496332539824:android:f7d113b2aa8065f7",
+        "android_client_info": {
+          "package_name": "com.example.danilo.chat1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "496332539824-ahkl7hs8qknfgc7delheaca1cuqijrmq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.danilo.chat1",
+            "certificate_hash": "5549fe27806e78d72b09d8e6f55b034766e35d6c"
+          }
+        },
+        {
+          "client_id": "496332539824-r3pda2j3j96cp4o99la4ce8f58mj2n8t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6MLFixOANQ7dzbnXZCueTSsy0H0E9zz4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "496332539824-r3pda2j3j96cp4o99la4ce8f58mj2n8t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
