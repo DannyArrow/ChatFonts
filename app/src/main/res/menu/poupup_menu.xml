@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id= "@+id/aladin"
+        android:title="aladin"/>
+
+    <item
+        android:id="@+id/fenix"
+        android:title="fenix"/>
+
+    <item
+        android:id="@+id/codystar"
+        android:title= "codystar"/>
+
+    <item
+        android:id="@+id/adamina"
+        android:title= "adamina"/>
+
+    <item
+        android:id="@+id/almemdra"
+        android:title= "almendra"/>
+
+    <item
+        android:id="@+id/pacifico"
+        android:title= "pacifico"/>
+
+    <item
+        android:id="@+id/palanquin"
+        android:title= "palanquin"/>
+
+    <item
+        android:id="@+id/salsa"
+        android:title= "salsa"/>
+
+
+
+
+
+
+
+
+</menu>

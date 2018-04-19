@@ -11,4 +11,51 @@
 
 
 
+    <style name="adamina">
+        <item name="android:fontFamily">@font/adamina</item>
+    </style>
+
+   <style name="aladin">
+       <item name = "android:fontFamily">@font/aladin</item>
+   </style>
+
+    <style name="almendra">
+        <item name = "android:fontFamily">@font/almendra_display</item>
+    </style>
+
+    <style name="fenix">
+        <item name = "android:fontFamily">@font/fenix</item>
+    </style>
+
+    <style name="codystar">
+        <item name = "android:fontFamily">@font/codystar_light</item>
+    </style>
+
+    <style name="pacifico">
+        <item name = "android:fontFamily">@font/pacifico</item>
+    </style>
+
+    <style name="palanquin_dark">
+        <item name = "android:fontFamily">@font/palanquin_dark</item>
+    </style>
+
+    <style name="salsa">
+        <item name = "android:fontFamily">@font/salsa</item>
+    </style>
+
+
+    <string-array name="system">
+        <item>@style/adamina</item>
+        <item>@style/aladin</item>
+        <item>@style/almendra</item>
+        <item>@style/codystar</item>
+        <item>@style/fenix</item>
+        <item>@style/pacifico</item>
+        <item>@style/salsa</item>
+
+    </string-array>
+
+
+
+
 </resources>

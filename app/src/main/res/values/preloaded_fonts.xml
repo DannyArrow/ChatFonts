@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/adamina</item>
+        <item>@font/aladin</item>
+        <item>@font/almendra_display</item>
+        <item>@font/codystar_light</item>
+        <item>@font/fenix</item>
+        <item>@font/pacifico</item>
+        <item>@font/palanquin_dark</item>
+        <item>@font/salsa</item>
+    </array>
+</resources>

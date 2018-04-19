@@ -3,11 +3,5 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <item
-        android:title="Item"
-        app:showAsAction="always" />
-    <item
-        android:icon="@drawable/ic_settings_black_24dp"
-        android:title=""
-        app:showAsAction="always" />
+    <item android:title="Item" />
 </menu>

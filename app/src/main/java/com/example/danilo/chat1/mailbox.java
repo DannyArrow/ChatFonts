@@ -3,6 +3,7 @@ package com.example.danilo.chat1;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.danilo.chat1.adapters.Mailadapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -47,7 +49,7 @@ public class mailbox extends Fragment {
     HashMap<String, ArrayList<Object>> hashMap;
     TextView textViewhead;
     ArrayList<Object> arrayList;
-
+    AlertDialog.Builder alert;
     RecyclerView recyclerView;
     Mailadapter mailadapter;
     private HashMap<String, Object> data;
@@ -67,6 +69,7 @@ public class mailbox extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler);
         hashMap = new HashMap<>();
         counthash = new HashMap<>();
+        alert = new AlertDialog.Builder(getContext());
         setRetainInstance(true);
 
 
@@ -198,7 +201,7 @@ public class mailbox extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot eachmessage : dataSnapshot.getChildren()){
-                     chatMessage = eachmessage.getChildren().iterator().next().getValue(ChatMessage.class);
+                     chatMessage = eachmessage.getValue(ChatMessage.class);
 
                     Log.i("loop =",chatMessage.getMessageText());
 

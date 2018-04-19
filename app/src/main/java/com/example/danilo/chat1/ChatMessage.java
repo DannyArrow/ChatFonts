@@ -1,5 +1,7 @@
 package com.example.danilo.chat1;
 
+import android.graphics.Typeface;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,14 +16,15 @@ import java.util.Date;
         private String messageText;
         private String messageUser;
         private String messageTime;
+        private String userid;
+       private String profilepicture;
+       private Typeface fonts;
 
 
 
-    private String userid;
+    public ChatMessage(){
 
-
-    private String profilepicture;
-
+    }
         public ChatMessage(String messageText, String messageUser, String profilepicture,String userid) {
             this.messageText = messageText;
             this.messageUser = messageUser;
@@ -34,9 +37,13 @@ import java.util.Date;
             messageTime = dateFormat.format(date);
         }
 
-        public ChatMessage(){
+    public Typeface getFonts() {
+        return fonts;
+    }
 
-        }
+    public void setFonts(Typeface fonts) {
+        this.fonts = fonts;
+    }
 
         public String getUserid() {
         return userid;

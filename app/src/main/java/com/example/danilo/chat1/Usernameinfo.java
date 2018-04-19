@@ -10,6 +10,9 @@ public class Usernameinfo {
     private  String username;
     private String profilepicture;
 
+    public Usernameinfo() {
+    }
+
     public Usernameinfo(String username, String profilepicture) {
         this.username = username;
         this.profilepicture = profilepicture;

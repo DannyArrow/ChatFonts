@@ -107,56 +107,8 @@ public class Register extends Fragment{
         uploadpic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                  startPickImageActivity();
                 isuploadpicclick = true;
-
-/*
-                final Dialog dialog = new Dialog(getActivity());
-                dialog.setContentView(R.layout.custom);
-                dialog.setTitle("Title...");
-
-
-
-                ImageButton galleryButton = (ImageButton) dialog.findViewById(R.id.gallery);
-                ImageButton cameraButton = (ImageButton) dialog.findViewById(R.id.camera);
-                //galleryButton.setImageResource(R.drawable.gallery);
-                //cameraButton.setImageResource(R.drawable.camera);
-
-                // if button is clicked, close the custom dialog
-                galleryButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(getActivity(), "gallery click", Toast.LENGTH_SHORT);
-                        Log.e("gallery", "gallery button click");
-                        intent = new Intent();
-                        intent.setType("image/*");
-                        intent.setAction(Intent.ACTION_GET_CONTENT);
-                        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
-
-
-                        dialog.dismiss();
-                    }
-                });
-                cameraButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(getActivity(), "camera click", Toast.LENGTH_SHORT);
-                        Log.e("camera", "camera button click");
-                        //Intent cameraIntent;
-                        cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivityForResult(cameraIntent, PICK_FROM_CAMERA);
-
-
-
-                        dialog.dismiss();
-                    }
-                });
-
-                dialog.show();
-                */
-
             }
 
         });

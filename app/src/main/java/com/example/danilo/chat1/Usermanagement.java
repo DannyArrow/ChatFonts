@@ -1,19 +1,23 @@
 package com.example.danilo.chat1;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +27,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -55,7 +64,7 @@ public class Usermanagement extends Fragment implements View.OnClickListener {
     private static final int RESULT_OK = -1;
     TextView username;
     StorageReference mStorageRef;
-
+    FragmentTransaction fragmentTransaction;
     ProgressBar progressBar;
     ConstraintLayout messagelayout;
     ConstraintLayout friendslayout;
@@ -69,15 +78,38 @@ public class Usermanagement extends Fragment implements View.OnClickListener {
     DatabaseReference databaseReference;
     FirebaseUser firebaseUser;
     private String name;
+    boolean b = false;
+    ProgressDialog progress;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.manageusersetting, container, false);
+
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if(b) {
+                    if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                        if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+                            return true;
+                        }
+                    }
+                }
+                    return false;
+
+            }
+        });
+
+
+
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference();
         username = (TextView) view.findViewById(R.id.txt_username);
         propic = (CircleImageView) view.findViewById(R.id.profile_image);
-        progressBar = (ProgressBar) view.findViewById(R.id.progressBar2);
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar10);
         messagelayout = (ConstraintLayout)  view.findViewById(R.id.messages_layout);
         friendslayout = (ConstraintLayout) view.findViewById(R.id.friends_layout);
         invitelayout = (ConstraintLayout) view.findViewById(R.id.invites_layout);
@@ -86,11 +118,15 @@ public class Usermanagement extends Fragment implements View.OnClickListener {
         friends =(TextView) view.findViewById(R.id.num_friends);
         invites = (TextView) view.findViewById(R.id.num_invites);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        progress = new ProgressDialog(getActivity());
 
+        progressBar.setVisibility(View.VISIBLE);
 
         loadcurrentimage();
         loadusernametotext();
         count_of_current_message();
+        friends_counts();
+        invitation_counts();
 
         // action bars
         AppCompatActivity activity = (AppCompatActivity) getContext();
@@ -102,6 +138,8 @@ public class Usermanagement extends Fragment implements View.OnClickListener {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 Toasty.normal(getContext(),"back clicked", Toast.LENGTH_LONG).show();
             }
         });
@@ -122,19 +160,23 @@ public class Usermanagement extends Fragment implements View.OnClickListener {
 
 
 
+
     @Override
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.profile_image:
                 Toasty.normal(getContext(),"picture click", Toast.LENGTH_LONG).show();
-                CropImage.activity()
+
+          b = true;
+
+            CropImage.activity()
                         .setGuidelines(CropImageView.Guidelines.ON)
                         .start(getContext(),this);
                 break;
 
             case R.id.messages_layout:
                 mailbox mail = new mailbox();
-                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.main,mail);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
@@ -144,9 +186,19 @@ public class Usermanagement extends Fragment implements View.OnClickListener {
 
             case R.id.friends_layout:
                 Toasty.normal(getContext(),"friends clicked", Toast.LENGTH_LONG).show();
+                Friends friends = new Friends();
+                fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.main,friends);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
                 break;
 
             case R.id.invites_layout:
+                Invite invite = new Invite();
+                fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.main,invite);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
                 Toasty.normal(getContext(),"ivites clicked", Toast.LENGTH_LONG).show();
                 break;
 
@@ -154,6 +206,38 @@ public class Usermanagement extends Fragment implements View.OnClickListener {
                 Toasty.normal(getContext(),"setting clicked", Toast.LENGTH_LONG).show();
                 break;
         }
+    }
+
+    private void friends_counts(){
+        databaseReference.child("useraccount").child(firebaseUser.getUid()).child("friends").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int count = (int) dataSnapshot.getChildrenCount();
+                String countstring = String.valueOf(count);
+                friends.setText(countstring);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void invitation_counts(){
+        databaseReference.child("useraccount").child(firebaseUser.getUid()).child("invitaion").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int countt = (int) dataSnapshot.getChildrenCount();
+                String countstr = String.valueOf(countt);
+                invites.setText(countstr);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void count_of_current_message() {
@@ -177,7 +261,7 @@ public class Usermanagement extends Fragment implements View.OnClickListener {
 
 
     public void loadusernametotext(){
-        databaseReference.child("useraccount").child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
+        databaseReference.child("useraccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 HashMap<String, String> userinfo = (HashMap<String, String>) dataSnapshot.getValue();
@@ -213,17 +297,30 @@ public class Usermanagement extends Fragment implements View.OnClickListener {
 
                         Usernameinfo usernameinfo = new Usernameinfo(name, downloadUrl);
                         if (usernameinfo.getUsername() != null) {
-                            databaseReference.child("useraccount").child(firebaseUser.getUid()).setValue(usernameinfo).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            databaseReference.child("useraccount").child(firebaseUser.getUid()).child("profilepicture").setValue(downloadUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    Toasty.success(getContext(), "pictues uploaded", Toast.LENGTH_LONG).show();
-                                    Glide.with(getContext()).load(downloadUrl).into(propic);
+                                   Toasty.success(getContext(), "pictues uploaded", Toast.LENGTH_LONG).show();
+                                    progress.dismiss();
+                                    progressBar.setVisibility(View.INVISIBLE);
+                                    b = false;
+
+
 
                                 }
                             });
                         }
                     }
-                });
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toasty.error(getContext(), "profile pictures didn't upload properly", Toast.LENGTH_LONG).show();
+
+                progress.setCancelable(false);
+                progress.dismiss();
+                progressBar.setVisibility(View.INVISIBLE);
+            }
+        });
 }
 
     private String saveToInternalStorage(Bitmap bitmapImage) {
@@ -255,19 +352,27 @@ public class Usermanagement extends Fragment implements View.OnClickListener {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+
+
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 Uri resultUri = result.getUri();
+
                 try {
+                    progress.setMessage("uploading profile picture to server. Please wait...");
+                    progress.show();
+                    progressBar.setVisibility(View.VISIBLE);
                     Bitmap bitmap1 = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), resultUri);
                   saveToInternalStorage(bitmap1);
-
+                   loadimage(resultUri);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                loadimage(resultUri);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                 progress.dismiss();
+                progressBar.setVisibility(View.INVISIBLE);
                 Exception error = result.getError();
             }
         }
@@ -284,7 +389,19 @@ public class Usermanagement extends Fragment implements View.OnClickListener {
                 HashMap<String, String> userinfo = (HashMap<String, String>) dataSnapshot.getValue();
                 String profilepicture = userinfo.get("profilepicture");
                 if (profilepicture != null) {
-                    Glide.with(getContext()).load(profilepicture).into(propic);
+                    Glide.with(getContext()).load(profilepicture).listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            progressBar.setVisibility(View.GONE);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            progressBar.setVisibility(View.GONE);
+                            return false;
+                        }
+                    }).into(propic);
                 }
             }
 
@@ -294,6 +411,9 @@ public class Usermanagement extends Fragment implements View.OnClickListener {
             }
         });
     }
+
+
+
 
 
 

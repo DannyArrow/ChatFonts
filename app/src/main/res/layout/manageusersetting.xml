@@ -28,37 +28,42 @@
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center"
                     android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/ic_account_circle_black_24dp"
                     android:clickable="true"
-                    android:elevation="4dp"
-                    app:civ_border_color="#FF000000"
-                    app:civ_border_width="2dp"
+                    android:src="@drawable/ic_account_circle_black_24dp"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ProgressBar
-                    android:id="@+id/progressBar2"
-                    style="?android:attr/progressBarStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/profile_image"
-                    app:layout_constraintHorizontal_bias="0.493"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/profile_image"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.494" />
+                    app:layout_constraintVertical_bias="0.48" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar10"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.487" /><![CDATA[
+
+
+
+
+
+                =                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.407" />
+
+
+
+            ]]>
             </android.support.constraint.ConstraintLayout>
 
             <TextView
@@ -74,13 +79,13 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="2dp"
-                android:background="#c0c0c0"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="15dp"
+                android:background="#c0c0c0" />
 
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/messages_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/messages_layout">
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/messages_img"
@@ -127,13 +132,13 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="2dp"
-                android:background="#c0c0c0"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                android:background="#c0c0c0" />
 
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/friends_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/friends_layout">
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/friends_img"
@@ -168,7 +173,9 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="8dp"
+                    android:background="@drawable/rectanglenumber"
                     android:gravity="center"
+                    android:textAlignment="center"
                     android:textColor="#000000"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -178,14 +185,14 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="2dp"
-                android:background="#c0c0c0"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                android:background="#c0c0c0" />
 
 
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/invites_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/invites_layout">
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/invites_img"
@@ -220,7 +227,9 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="8dp"
+                    android:background="@drawable/rectanglenumber"
                     android:gravity="center"
+                    android:textAlignment="center"
                     android:textColor="#000000"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -230,14 +239,14 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="2dp"
-                android:background="#c0c0c0"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                android:background="#c0c0c0" />
 
 
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/settings_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/settings_layout">
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/settings_img"
@@ -269,8 +278,8 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="2dp"
-                android:background="#c0c0c0"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                android:background="#c0c0c0" />
 
 
         </LinearLayout>

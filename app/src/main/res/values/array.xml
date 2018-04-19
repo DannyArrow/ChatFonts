@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="fonts">
+        <item></item>
+        <item>cursive</item>
+        <item>aladin</item>
+        <item>almendrar</item>
+        <item>fenix</item>
+        <item>cusual</item>
+        <item>pacifico</item>
+    </string-array>
+</resources>

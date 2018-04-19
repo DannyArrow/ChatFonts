@@ -1,4 +1,4 @@
-package com.example.danilo.chat1;
+package com.example.danilo.chat1.adapters;
 
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -13,6 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.danilo.chat1.Mailmessage;
+import com.example.danilo.chat1.Privatemessage;
+import com.example.danilo.chat1.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,7 +39,7 @@ public class Mailadapter extends RecyclerView.Adapter<Mailadapter.ViewHolder> {
     public Mailadapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         // Inflate the custom layout
-        View contactView = inflater.inflate(R.layout.messagerow, parent, false);
+        View contactView = inflater.inflate(R.layout.mailrow, parent, false);
         ViewHolder holder = new ViewHolder(contactView);
         return holder;
     }
@@ -47,10 +50,12 @@ public class Mailadapter extends RecyclerView.Adapter<Mailadapter.ViewHolder> {
 
         ArrayList<Object> list =    hashMap.get(mailmessage.getUsertalking());
         if(list != null) {
-            String count = String.valueOf(list.size());
 
-            holder.constraintLayout.setBackgroundResource(R.color.colorAccent);
-            holder.unreadcount.setText("unread message "+ count);
+            if(list.size() > 0) {
+                String count = String.valueOf(list.size());
+                holder.constraintLayout.setBackgroundResource(R.color.colorAccent);
+                holder.unreadcount.setText("unread message " + count);
+            }
         }
 
             holder.messagetext.setText(mailmessage.getMessage());
@@ -78,9 +83,9 @@ public class Mailadapter extends RecyclerView.Adapter<Mailadapter.ViewHolder> {
 
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
             textname = (TextView) itemView.findViewById(R.id.textView2);
-            messagetext = (TextView) itemView.findViewById(R.id.tv_long);
+            messagetext = (TextView) itemView.findViewById(R.id.textView7);
             time = (TextView) itemView.findViewById(R.id.textView4);
-            unreadcount = (TextView) itemView.findViewById(R.id.textView7);
+            unreadcount = (TextView) itemView.findViewById(R.id.textView15);
             constraintLayout = (ConstraintLayout) itemView.findViewById(R.id.background);
 
 
