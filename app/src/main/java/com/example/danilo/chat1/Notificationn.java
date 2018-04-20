@@ -44,6 +44,9 @@ public class Notificationn extends FirebaseMessagingService {
     public static String KEY_QUICK_REPLY = "key_reply_message";
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = database.getReference();
+    private String notificationTitle = null, notificationBody = null, photourl = null, type = null, senderid = null;
+    Typeface typeface;
+    private Bitmap photo = null;
 
     private static final String TAG = "FirebaseMessagingServce";
     int mNotificationId = 1;
@@ -65,16 +68,17 @@ public class Notificationn extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         Map<String, String> data = remoteMessage.getData();
         Log.i("log =", String.valueOf(data));
-        String notificationTitle = null, notificationBody = null, photourl = null, type = null, senderid = null;
-        Bitmap photo = null;
+
+
 
         type =  data.get("type");
         senderid = data.get("senderid");
 
+        if(type != null){
         if(!type.isEmpty()){
             sendrequest(senderid);
             return;
-        }
+        }}
         notificationTitle = data.get("title");
         notificationBody = data.get("message");
 
@@ -87,7 +91,8 @@ public class Notificationn extends FirebaseMessagingService {
         }
 
 
-        sendmessage(notificationTitle,notificationBody,photo);
+
+
 
     }
 
@@ -176,8 +181,8 @@ public class Notificationn extends FirebaseMessagingService {
 
         // Add as notification
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        manager.notify(Integer.parseInt(id), builder.build());
+//        int idd = Integer.parseInt(id);
+        manager.notify(mNotificationId, builder.build());
 
 
     }
@@ -231,10 +236,10 @@ public class Notificationn extends FirebaseMessagingService {
 
         String fontName = "digital-7";
         float textSize = 50;
-        Typeface font = ResourcesCompat.getFont(context, R.font.pacifico);
+       // Typeface font = ResourcesCompat.getFont(context, fontvalue);
         Paint paint = new Paint();
         paint.setTextSize(textSize);
-        paint.setTypeface(font);
+        paint.setTypeface(typeface);
         paint.setColor(textColor);
         paint.setTextAlign(Paint.Align.LEFT);
         float baseline = -paint.ascent(); // ascent() is negative
@@ -257,19 +262,50 @@ public class Notificationn extends FirebaseMessagingService {
     }
 
     private void fetch_front(){
-        databaseReference.child("useraccount").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("fonts").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                HashMap<String,String> usernameinfo = (HashMap<String, String>) dataSnapshot.getValue();
-                String fontfetch =  usernameinfo.get("fonts");
-              fontvalue =  map.get(fontfetch);
-            }
+
+                String fontfetch = (String) dataSnapshot.getValue();
+                if(fontfetch != null) {
+                    switch (fontfetch) {
+                        case "aladin":
+                            typeface = ResourcesCompat.getFont(getApplicationContext(), R.font.aladin);
+                            break;
+                        case "fenix":
+                            typeface = ResourcesCompat.getFont(getApplicationContext(), R.font.fenix);
+                            break;
+                        case "codystar":
+                            typeface = ResourcesCompat.getFont(getApplicationContext(), R.font.codystar_light);
+                            break;
+                        case "adamina":
+                            typeface = ResourcesCompat.getFont(getApplicationContext(), R.font.adamina);
+                            break;
+                        case "pacifico":
+                            typeface = ResourcesCompat.getFont(getApplicationContext(), R.font.pacifico);
+                            break;
+                        case "salsa":
+                            typeface = ResourcesCompat.getFont(getApplicationContext(), R.font.salsa);
+                            break;
+                        default:
+                            typeface = ResourcesCompat.getFont(getApplicationContext(), R.font.pacifico);
+                            break;
+                    }
+
+                }
+                    if(typeface != null)
+                    sendmessage(notificationTitle, notificationBody, photo);
+
+                }
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
+
         });
+
 
 
     }
