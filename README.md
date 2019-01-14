@@ -1,6 +1,6 @@
 # Chat_firebase.....
 
-   <img src="https://www.dropbox.com/s/1jf5deha30pfplj/Screenshot_20190111-095612_Chat.jpg?raw=1" alt="Smiley face" height="250" width="200" align="middle">
+   <center><img src="https://www.dropbox.com/s/1jf5deha30pfplj/Screenshot_20190111-095612_Chat.jpg?raw=1" alt="Smiley face" height="250" width="200" align="middle"></center>
    
  <img src="https://www.dropbox.com/s/vs42i0rcmwrke2m/Screenshot_20190111-095719_Chat.jpg?raw=1" alt="Smiley face" height="250" width="200" align="middle">
 
