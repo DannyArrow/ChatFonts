@@ -1,5 +1,26 @@
 # Chat_firebase.....
 
+# Features! 
+<ul>
+   <li> user get a notification on the notification bar anytime a user message them directly </li>
+  <li>user's can have their own fonts</li>
+  <li>users can friend request or private message other user</li>
+  <li> user can have their own profile picture and change it in the profile setting</h1>
+  <li> user can see who messaging and the number of unread message by looking at their inbox </>
+   <li> user can send pictures to each other</li>
+  </ul>
+  
+  
+  # Tech used
+  <ul>
+     <li> android studio</li>
+     <li> Java </li>
+     <li> firebase realtime database </li>
+     <li> node.js </li>
+     <li> firebase cloud storage</li>
+     <li> firebase cloud function </li>
+     </ul>
+
 <h2>group messaging</h2>
    <center><img src="https://www.dropbox.com/s/1jf5deha30pfplj/Screenshot_20190111-095612_Chat.jpg?raw=1" alt="Smiley face" height="250" width="200" align="middle"></center>
    
