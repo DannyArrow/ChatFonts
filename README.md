@@ -17,10 +17,10 @@
    
  <h1> you can privately message other user<h1>
 <img src="https://www.dropbox.com/s/5hxx58odrghw7sb/Screenshot_20190111-095626_Chat.jpg?raw=1" alt="Smiley face" height="250" width="200">
-   
+ 
+ <h1> when you click on user you can friend request or private message the user </h1>
+<img src="https://www.dropbox.com/s/rfen041rvqr8gka/Screenshot_20190111-095619_Chat.jpg?raw=1" alt="Smiley face" height="250" width="200"> 
 
-<img src="https://www.dropbox.com/s/5hxx58odrghw7sb/Screenshot_20190111-095626_Chat.jpg?raw=1" alt="Smiley face" height="250" width="200">
 
-<img src="https://www.dropbox.com/s/tkkclepfmus91zb/20181129_093551.jpg?raw=1" alt="Smiley face" height="250" width="200">
 
 
