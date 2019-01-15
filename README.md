@@ -1,4 +1,4 @@
-# Chat_firebase.....
+# an android messaging application
 
 # Features! 
 <ul>
